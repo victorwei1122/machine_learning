@@ -1,0 +1,23 @@
+artifact_path: /Users/zihanwei/Desktop/projects/machine_learning/credit_risk/mlruns/1/models/m-09a3422da18746308089eed3814059ce/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.2
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+    skops_trusted_types: null
+mlflow_version: 3.10.1
+model_id: m-09a3422da18746308089eed3814059ce
+model_size_bytes: 4831986
+model_uuid: m-09a3422da18746308089eed3814059ce
+prompts: null
+run_id: d9e5f313b9ce4c0fb320e20225f5b4b7
+utc_time_created: '2026-03-24 02:21:33.213613'
