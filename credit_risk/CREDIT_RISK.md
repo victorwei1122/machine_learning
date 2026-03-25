@@ -77,6 +77,11 @@ docker build -t credit-risk-api .
 docker run -p 8000:8000 credit-risk-api
 ```
 
+- **Access the API UI**: Once running, visit **<http://localhost:8000/docs>** for the interactive Swagger documentation.
+- **Endpoints**:
+  - `POST /predict`: Submit credit applications for risk assessment.
+  - `GET /health`: Check service and model status.
+
 ### 2. Cloud Hosting Options
 
 - **GCP Cloud Run** (Recommended): Serverless, cost-effective, and easy to manage.

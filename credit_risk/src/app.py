@@ -14,6 +14,7 @@ class CreditRequest(BaseModel):
     loan_grade: str
     loan_amnt: float
     loan_int_rate: float
+    loan_percent_income: float = None  # Will be calculated if not provided
     cb_person_default_on_file: str
     cb_person_cred_hist_length: float
 
@@ -40,16 +41,41 @@ def predict(request: CreditRequest):
     if model is None or preprocessor is None:
         raise HTTPException(status_code=500, detail="Model not loaded")
     
-    # Create a DataFrame from the request
-    input_data = pd.DataFrame([request.dict()])
+    # Create a dictionary from the request
+    data_dict = request.dict()
+    
+    # Auto-calculate loan_percent_income if not provided
+    if data_dict.get('loan_percent_income') is None:
+        data_dict['loan_percent_income'] = data_dict['loan_amnt'] / data_dict['person_income']
+    
+    # Create a DataFrame from the dictionary
+    input_data = pd.DataFrame([data_dict])
+    
+    # Ensure columns are in the exact order the preprocessor expects
+    # (The order must match the training set features)
+    ordered_cols = [
+        'person_age', 'person_income', 'person_home_ownership', 'person_emp_length',
+        'loan_intent', 'loan_grade', 'loan_amnt', 'loan_int_rate', 
+        'loan_percent_income', 'cb_person_default_on_file', 'cb_person_cred_hist_length'
+    ]
+    input_data = input_data[ordered_cols]
     
     # Preprocess the input
     try:
         input_processed = preprocessor.transform(input_data)
         
+        # Prepare for prediction (the model was fitted on named features)
+        # We wrap in a DataFrame with clean names to avoid the UserWarning/ValueError
+        numerical_cols = input_data.select_dtypes(exclude=['object']).columns.tolist()
+        categorical_cols = input_data.select_dtypes(include=['object']).columns.tolist()
+        cat_feature_names = preprocessor.named_transformers_['cat'].get_feature_names_out(categorical_cols)
+        all_feature_names = numerical_cols + list(cat_feature_names)
+        
+        input_processed_df = pd.DataFrame(input_processed, columns=all_feature_names)
+        
         # Predict
-        prediction = model.predict(input_processed)[0]
-        probability = model.predict_proba(input_processed)[0][1]
+        prediction = model.predict(input_processed_df)[0]
+        probability = model.predict_proba(input_processed_df)[0][1]
         
         return {
             "loan_status_prediction": int(prediction),
