@@ -10,21 +10,25 @@ Each use case in this repository follows a structured MLOps pipeline to ensure s
 | :--- | :--- | :--- |
 | **1. Data Cleaning** | Handling missing values, outliers, and data quality issues. | Pandas, SQL, Data Validation |
 | **2. Feature Engineering** | Selecting and transforming variables to improve model performance. | Scaling, Encoding, PCA, Feature Selection |
-| **3. Training & Registry** | Controlled experimentation and model versioning. | Scikit-learn, MLflow, Experiment Tracking |
+| **3. Training & Registry** | Controlled experimentation and model versioning. | Scikit-learn, LightGBM, MLflow |
 | **4. Deployment** | Serving models for real-time or batch inferencing. | Docker, FastAPI, Model Serving |
 | **5. Batch Prediction** | Running efficient inference on large datasets. | Cron Jobs, Spark, Batch Scripts |
-| **6. Model Evaluation** | Continuous monitoring of drift and performance metrics. | Accuracy/F1, MSE/MAE, Monitoring Dashboards |
+| **6. Model Evaluation** | Continuous monitoring of drift and performance metrics. | Accuracy/F1 (Macro), Precision/Recall |
 
 ## 📂 Repository Structure
 
 ```text
 machine_learning/
-├── credit_risk/           # Credit default prediction use case
+├── credit_risk/           # Credit default prediction (Supervised)
 │   ├── data/              # Raw and processed datasets
-│   ├── notebooks/         # Exploratory Data Analysis (EDA)
-│   ├── src/               # Reusable source code (cleaning, training, etc.)
-│   ├── models/            # Serialized model artifacts
-│   └── README.md          # Use-case specific documentation
+│   ├── notebooks/         # Interactive MLOps Step-by-Step
+│   ├── src/               # Modular components (cleaning, training, etc.)
+│   └── README.md          # Use-case documentation
+├── segmentation/          # Household Poverty & Clustering
+│   └── costa_rican_poverty/ # Hybrid Clustering + Classification
+│       ├── notebooks/      # Visual EDA & Self-Contained logic
+│       ├── src/            # Production-ready MLOps code
+│       └── POVERTY_PREDICTION.md # Data Dictionary & Insights
 ├── templates/             # Starter templates for new ML projects
 └── README.md              # Main repository overview (you are here)
 ```
@@ -33,13 +37,15 @@ machine_learning/
 
 | Project | Domain | Status | Key Tech |
 | :--- | :--- | :--- | :--- |
-| **[Credit Risk](./credit_risk)** | Finance | 🏗 In Progress | Scikit-Learn |
+| **[Credit Risk](./credit_risk)** | Finance | ✅ Completed | Scikit-Learn, MLflow, FastAPI |
+| **[Poverty Prediction](./segmentation/costa_rican_poverty)** | Social Science | ✅ Completed | LightGBM, K-Means, Docker |
 
 ## 🛠 Tech Stack
 
-- **Core**: Python (Pandas, NumPy, Scikit-learn)
-- **Tracking**: MLflow (Proposed)
-- **Serving**: FastAPI / Docker (Proposed)
+- **Core**: Python (Pandas, NumPy, Scikit-learn, LightGBM)
+- **Tracking**: MLflow (Experiment tracking and model registry)
+- **Serving**: FastAPI / Docker (Containerized real-time inference)
+- **Clustering**: K-Means for natural socio-economic segmentation
 - **DevOps**: GitHub Actions for CI/CD
 
 ## 🏁 Getting Started
@@ -56,7 +62,7 @@ machine_learning/
    ```bash
    python -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt
+   pip install -r segmentation/costa_rican_poverty/requirements.txt
    ```
 
 ---
