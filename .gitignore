@@ -1,0 +1,18 @@
+# Data files
+**/data/*.csv
+**/data/*.parquet
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/

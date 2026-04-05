@@ -29,6 +29,9 @@ machine_learning/
 │       ├── notebooks/      # Visual EDA & Self-Contained logic
 │       ├── src/            # Production-ready MLOps code
 │       └── POVERTY_PREDICTION.md # Data Dictionary & Insights
+├── portfolio_optimization/  # Mean-Variance Optimization
+├── fraud_detection/       # Transaction fraud detection
+├── customer_churn/        # Banking customer churn prediction
 ├── templates/             # Starter templates for new ML projects
 └── README.md              # Main repository overview (you are here)
 ```
@@ -39,6 +42,11 @@ machine_learning/
 | :--- | :--- | :--- | :--- |
 | **[Credit Risk](./credit_risk)** | Finance | ✅ Completed | Scikit-Learn, MLflow, FastAPI |
 | **[Poverty Prediction](./segmentation/costa_rican_poverty)** | Social Science | ✅ Completed | LightGBM, K-Means, Docker |
+| **[Portfolio Optimization](./portfolio_optimization)** | Finance | ✅ Completed | PyPortfolioOpt, SciPy |
+| **[Fraud Detection](./fraud_detection)** | Banking | ✅ Completed | Isolation Forest, XGBoost |
+| **[Customer Churn](./customer_churn)** | Banking | ✅ Completed | Scikit-Learn, MLflow |
+| **Intelligent Doc Processing / NLP** | Banking | 📅 Planned | Transformers, OCR |
+| **Algorithmic Trading** | Finance / Banking | 📅 Planned | Time-Series Forecasting |
 
 ## 🛠 Tech Stack
 
